@@ -1,4 +1,4 @@
-Catégorie,Question,Bonne Réponse,Mauvaise Réponse 1,Mauvaise Réponse 2,Mauvaise Réponse 3,Difficulté
+category,question,correct_answer,incorrect_answer_1,incorrect_answer_2,incorrect_answer_3,difficulty
 SQL,Quelle est la différence entre INNER JOIN et LEFT JOIN en SQL ?,INNER JOIN renvoie uniquement les lignes ayant des correspondances dans les deux tables, tandis que LEFT JOIN renvoie toutes les lignes de la table à gauche et les lignes correspondantes de la table à droite.,INNER JOIN renvoie toutes les lignes de la table à gauche et les lignes correspondantes de la table à droite.,LEFT JOIN renvoie uniquement les lignes ayant des correspondances dans les deux tables.,INNER JOIN et LEFT JOIN sont des termes interchangeables en SQL.,Moyenne
 SQL,Comment supprimer toutes les lignes d'une table sans supprimer la table elle-même ?,DELETE FROM nom_table;,REMOVE FROM nom_table;,DROP FROM nom_table;,TRUNCATE nom_table;,Moyenne
 SQL,Quelle fonction SQL est utilisée pour trouver le nombre total de lignes dans une table ?,SELECT COUNT(*) FROM nom_table;,SELECT TOTAL_ROWS(nom_table) FROM nom_table;,COUNT(nom_table);,SUM_ROWS(nom_table);,Moyenne
