@@ -8,15 +8,21 @@ class Game:
         self.themes = ["Python", "SQL", "Actualités", "Git", "CLI"]
 
     def init_grid(self):
-        self.grid = Grid()
+        self.grid = Grid(30,30)
+        self.init_position = self.grid.init_position()
+        return self.grid
     
-    def init_players(self, names):
-        for name in names:
-            self.players.append(Player(name))
+    def init_players(self, names, colors):
+        for name, color in names, colors:
+            self.players.append(Player(name, color, self.init_position))
         return self.players
 
     def first_player(self):
         pass
+
+
+
+
 
 
 
