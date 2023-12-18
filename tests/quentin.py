@@ -25,18 +25,3 @@ class Game:
 
 
 
-
-class Grid:
-    def __init__(self, themes):
-        self.width = 10
-        self.height = 10
-        self.themes = themes
-        self.cases = []
-
-    def create_cases(self):
-        for i in range(self.height):
-            row = []
-            for j in range(self.width):
-                row.append({"position": (i,j), "active": True, "theme": random.sample})
-            self.cases.append(row)
-
