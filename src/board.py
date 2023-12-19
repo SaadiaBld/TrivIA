@@ -253,8 +253,19 @@ class Board():
         for j in random.sample(["correct_answer", "incorrect_answer_1", "incorrect_answer_2", "incorrect_answer_3"], 4):
                 i+=1
                 print(f"{i}. {dictionnaire_avec_question[j]}")
-                 
-                     
+                
+                if j == "correct_answer":
+                    correct_number = i
+
+        # demander de choisir une réponse à l'utilisateur
+        user_answer = input("Merci de taper le chiffre correspondant à la réponse que vous souhaitez donner : ")
+
+        if int(user_answer) == correct_number:
+            print("Bravo! Bonne réponse")
+        else:
+            print("Raté.")
+
+
 boardgame = Board(12,12) #taille maximale pour le moment, il faut optimiser la taille dans la méthode de la classe Grid
 title = boardgame.show_title()
 print(title)
