@@ -2,14 +2,13 @@ import pandas as pd
 import sqlite3
 import os
 
-path = os.path.dirname(os.path.abspath(__file__))
-db = os.path.join(path, 'trivia.db')
-
 
 def get_database(func):
     """Decorateur qui initialise la connexion avec la bdd, lance une action sur la bdd puis ferme la connexion"""
 
     def wrap(*args, **kargs):
+        path = os.path.dirname(os.path.abspath(__file__))
+        db = os.path.join(path, 'trivia.db')
         con = sqlite3.connect(db)
         cur = con.cursor()
         result = func(*args, *kargs, cur)
@@ -101,27 +100,3 @@ def delete_table(cur):
     """Supprime la table question"""
 
     cur.execute("""DROP TABLE Questions""")
-
-
-def test_db():
-
-    categories = ["python", "sql", "git", "terminal", "actu_ia", "soft_skills"]
-    ids_used = []
-
-    for category in categories:
-
-        while True:
-
-            question = read_table(category, ids_used)
-
-            if question is None:
-                break
-
-            ids_used.append(question["id"])
-            print(question)
-
-    print("Nombre de questions posées : ", len(ids_used))
-    print("listes des ids : ", ids_used)
-
-result = read_table("python", [])
-print(result)

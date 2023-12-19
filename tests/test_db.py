@@ -13,7 +13,7 @@ sys.path.insert(0, parentdir)
 
 from src.db import read_table
 
-def test_db():
+def test_all_db():
 
     categories = ["python", "sql", "git", "terminal", "actu_ia", "soft_skills"]
     ids_used = []
@@ -30,8 +30,14 @@ def test_db():
             ids_used.append(question["id"])
             print(question)
 
-    print("Nombre de questions posées :" + len(ids_used))
-    print("listes des ids :" + ids_used)
+    print("Nombre de questions posées : ", len(ids_used))
+    print("listes des ids : ", ids_used)
 
 
-test_db()
+def test_one_question(category):
+    
+    question = read_table(category, [])
+    print(question)
+
+
+test_one_question("python")
