@@ -8,7 +8,7 @@ class Player:
         self.id = id
         self.name = input("What's your name?: ")
         self.token = "🦊"
-        self.score = 0
+        self.score = [0,0,0,0,0,0]
         self.x = 6
         self.y = 6
     
