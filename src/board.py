@@ -1,6 +1,6 @@
 import random
 import pandas as pd
-from src.db import *
+from db import read_table
 
 class Board():
 
@@ -251,7 +251,7 @@ class Board():
         # randomiser et afficher les réponses (pour éviter que ce soit toujours la réponse A la réponse correcte)
 
         for i in random.sample([4,5,6,7], 4):
-            print(dictionnaire_avec_question[i])
+            return (dictionnaire_avec_question[i])
                  
             
 boardgame = Board(12,12) #taille maximale pour le moment, il faut optimiser la taille dans la méthode de la classe Grid
