@@ -16,7 +16,7 @@ class Player:
         dice = randint(1, 6)
         return dice
     
-    def choose_moove(self):
+    def choose_move(self):
         """On définit ici la logique de déplacement lorsque le joueur est dans les arêtes du milieu"""
         if self.y == 6 and self.x == 6:
             choix1 = self.x + self.roll_dice()
@@ -58,11 +58,13 @@ class Player:
         
 
     def answer_question(self):
+
         pass 
     
     def upgrade_score(self):
-        if self.answer_question:
+        if self.answer_question == correct_answer:
             self.score += 1
+        return self.score
     
     def show_score(self):
         return self.upgrade_score
