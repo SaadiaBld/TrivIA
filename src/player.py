@@ -4,7 +4,8 @@ class Player:
     #self.position = position
     #position_initiale = 6,6 avec la taille initiale de 11*11
 
-    def __init__(self):
+    def __init__(self, id):
+        self.id = id
         self.name = input("What's your name?: ")
         self.token = "🦊"
         self.score = 0
