@@ -1,4 +1,6 @@
 import random
+import pandas as pd
+from src.db import *
 
 class Board():
 
@@ -212,7 +214,45 @@ class Board():
         # on peut aussi ajuster la liste à chaque fois qu'un joueur passe devant un autre joueur
         # afficher la liste des scores de manière croissante/décroissante
         pass
-        
+
+
+    def ask_question(self):
+
+        self.ids = [] # à mettre dans le init de la classe
+
+        self.categories = {"0": [0, "⬛️", 0],
+                                "1": ["python", "🟩"],
+                                "2": ["sql", "🟪"],
+                                "3": ["git", "🟨"],
+                                "4": ["terminal", "🟥"],
+                                "5": ["actu_ia", "🟦"],
+                                "6": ["soft_skills", "🟧"],
+                                "7": ["python", "🟩"],
+                                "8": ["soft_skills", "🟧"],
+                                "9": ["actu_ia", "🟦"],
+                                "10": ["terminal", "🟥"],
+                                "11": ["git", "🟨"],
+                                "12": ["sql", "🟪"],
+                                "13": ["python", "🟩"],
+                                "14": ["start", "⬜️"]}
+
+        # categories["1"][0]
+
+        # retourne la catégorie de la case sur laquelle le joueur se trouve
+        categ = print(self.categories[str(self.col)][0])
+
+        dictionnaire_avec_question = read_table(categ, self.ids)
+        print(dictionnaire_avec_question)
+        self.ids.append(dictionnaire_avec_question["id"])
+
+        # afficher la question (sortie de manière aléatoire via SQL)
+        dictionnaire_avec_question[3]
+
+        # randomiser et afficher les réponses (pour éviter que ce soit toujours la réponse A la réponse correcte)
+
+        for i in random.sample([4,5,6,7], 4):
+            print(dictionnaire_avec_question[i])
+                 
             
 boardgame = Board(12,12) #taille maximale pour le moment, il faut optimiser la taille dans la méthode de la classe Grid
 title = boardgame.show_title()
@@ -221,3 +261,4 @@ boardgame.create_boardgame()
 score_result = boardgame.show_score()
 print(score_result)
 boardgame.show_available_cells()
+boardgame.ask_question()
