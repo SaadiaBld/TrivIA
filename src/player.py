@@ -5,9 +5,10 @@ class Player:
     #position_initiale = 6,6 avec la taille initiale de 11*11
 
     def __init__(self, id):
-        self.id = id
+        tokens = ["🦊","🐨","🐼","🐸","🐱"]
+        self.id = int(id)
         self.name = input("What's your name?: ")
-        self.token = "🦊"
+        self.token = tokens[self.id]
         self.score = [0,0,0,0,0,0]
         self.x = 6
         self.y = 6
