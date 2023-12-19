@@ -1,6 +1,6 @@
 from src.board import Board
 from src.game import Game
-from src.ihm import Ihm
+#from src.ihm import Ihm
 
 #grille = Grid(10,10) #taille maximale pour le moment, il faut optimiser la taille dans la méthode de la classe Grid
 #grille.create_boardgame()
@@ -22,7 +22,7 @@ from src.ihm import Ihm
 
 
 if __name__ == "__main__":
-	game = Game(2)
+	game = Game(3)
 	game.print_players()
 	boardgame = Board(12,12)
 	title = boardgame.show_title()
@@ -30,13 +30,14 @@ if __name__ == "__main__":
 	boardgame.create_boardgame()
 	boardgame.show_available_cells()
 
-
+tmp = 0
 while game.game_continue():
-	game.players[1].score += 1
+	game.players[1].score[tmp]=tmp+1
+	tmp += 1
 	game.print_score()
-	score_result = boardgame.show_score()
-	print(score_result)
-
+	#score_result = boardgame.show_score()
+	#print(score_result)
+	print("")
 
 
 
