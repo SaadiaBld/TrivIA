@@ -1,12 +1,16 @@
 import pandas as pd
 import sqlite3
+import os
+
+path = os.path.dirname(os.path.abspath(__file__))
+db = os.path.join(path, 'trivia.db')
 
 
 def get_database(func):
     """Decorateur qui initialise la connexion avec la bdd, lance une action sur la bdd puis ferme la connexion"""
 
     def wrap(*args, **kargs):
-        con = sqlite3.connect("src/trivia.db")
+        con = sqlite3.connect(db)
         cur = con.cursor()
         result = func(*args, *kargs, cur)
         con.commit()

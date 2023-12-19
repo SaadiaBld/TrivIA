@@ -24,8 +24,8 @@ class Game:
         for num_player in range(self.numbers_of_players):
             if (self.players[num_player].score == self.perfect_score):
                 print("Bravo, joueur " + self.players[num_player].name + " gagne la parite !")
-                return False;
-        return True;
+                return False
+        return True
 
     def print_players(self):
         for player in self.players:
