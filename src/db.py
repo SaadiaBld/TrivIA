@@ -6,7 +6,7 @@ def get_database(func):
     """Decorateur qui initialise la connexion avec la bdd, lance une action sur la bdd puis ferme la connexion"""
 
     def wrap(*args, **kargs):
-        con = sqlite3.connect("trivia.db")
+        con = sqlite3.connect("src/trivia.db")
         cur = con.cursor()
         result = func(*args, *kargs, cur)
         con.commit()
@@ -119,5 +119,5 @@ def test_db():
     print("Nombre de questions posées : ", len(ids_used))
     print("listes des ids : ", ids_used)
 
-
-test_db()
+result = read_table("python", [])
+print(result)
