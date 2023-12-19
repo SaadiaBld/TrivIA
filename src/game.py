@@ -3,6 +3,7 @@ from src.player import Player
 
 class Game:
     def __init__(self, numbers_of_players):
+        self.numbers_of_players = numbers_of_players
         self.players = [Player(f"Player {i+1}") for i in range(numbers_of_players)]
         self.themes = ["Python", "SQL", "Actualités", "Git", "CLI"]
 
@@ -20,14 +21,20 @@ class Game:
         pass
 
     def game_continue(self):
-        for i in range(numbers_of_players):
+        for i in range(self.numbers_of_players):
             if self.players[i].score == 5:
                 return False;
         return True;
 
     def print_players(self):
         for player in self.players:
-            print(player.name)
+            print(player.name + " " + player.token)
+
+
+    def print_score(self):
+        for player in self.players:
+            print("Score " + player.name + " is " + str(player.score))
+
 
     
 
