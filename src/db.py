@@ -6,7 +6,7 @@ def get_database(func):
     """Decorateur qui initialise la connexion avec la bdd, lance une action sur la bdd puis ferme la connexion"""
 
     def wrap(*args, **kargs):
-        con = sqlite3.connect("trivia.db")
+        con = sqlite3.connect("src/trivia.db")
         cur = con.cursor()
         result = func(*args, *kargs, cur)
         con.commit()
@@ -76,17 +76,20 @@ def read_table(category, ids_used, cur):
 
     cur.execute(query, args)
     result = cur.fetchall()
-    question = {
-        'id': result[0][0],
-        'category': result[0][1],
-        'difficulty': result[0][2],
-        'question': result[0][3],
-        'correct_answer': result[0][4],
-        'incorrect_answer_1': result[0][5],
-        'incorrect_answer_2': result[0][6],
-        'incorrect_answer_3': result[0][7],
-    }
-    return question
+    if len(result) > 0:
+        question = {
+            "id": result[0][0],
+            "category": result[0][1],
+            "difficulty": result[0][2],
+            "question": result[0][3],
+            "correct_answer": result[0][4],
+            "incorrect_answer_1": result[0][5],
+            "incorrect_answer_2": result[0][6],
+            "incorrect_answer_3": result[0][7],
+        }
+        return question
+    else:
+        return None
 
     
 @get_database
@@ -94,3 +97,27 @@ def delete_table(cur):
     """Supprime la table question"""
 
     cur.execute("""DROP TABLE Questions""")
+
+
+def test_db():
+
+    categories = ["python", "sql", "git", "terminal", "actu_ia", "soft_skills"]
+    ids_used = []
+
+    for category in categories:
+
+        while True:
+
+            question = read_table(category, ids_used)
+
+            if question is None:
+                break
+
+            ids_used.append(question["id"])
+            print(question)
+
+    print("Nombre de questions posées : ", len(ids_used))
+    print("listes des ids : ", ids_used)
+
+result = read_table("python", [])
+print(result)
