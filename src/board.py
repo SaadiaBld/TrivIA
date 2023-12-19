@@ -254,11 +254,3 @@ class Board():
             return (dictionnaire_avec_question[i])
                  
             
-boardgame = Board(12,12) #taille maximale pour le moment, il faut optimiser la taille dans la méthode de la classe Grid
-title = boardgame.show_title()
-print(title)
-boardgame.create_boardgame()
-score_result = boardgame.show_score()
-print(score_result)
-boardgame.show_available_cells()
-boardgame.ask_question()
