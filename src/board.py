@@ -1,6 +1,6 @@
 import random
 import pandas as pd
-from src.db import *
+from db import read_table
 
 class Board():
 
@@ -239,16 +239,41 @@ class Board():
         # categories["1"][0]
 
         # retourne la catégorie de la case sur laquelle le joueur se trouve
-        categ = print(self.categories[str(self.col)][0])
+        categ = self.categories[str(self.col)][0]
 
         dictionnaire_avec_question = read_table(categ, self.ids)
-        print(dictionnaire_avec_question)
+        # print(dictionnaire_avec_question)
         self.ids.append(dictionnaire_avec_question["id"])
 
         # afficher la question (sortie de manière aléatoire via SQL)
-        dictionnaire_avec_question[3]
+        print(dictionnaire_avec_question["question"])
 
         # randomiser et afficher les réponses (pour éviter que ce soit toujours la réponse A la réponse correcte)
+        i = 0
+        for j in random.sample(["correct_answer", "incorrect_answer_1", "incorrect_answer_2", "incorrect_answer_3"], 4):
+                i+=1
+                print(f"{i}. {dictionnaire_avec_question[j]}")
+                
+                if j == "correct_answer":
+                    correct_number = i
+
+        # demander de choisir une réponse à l'utilisateur
+        user_answer = input("Merci de taper le chiffre correspondant à la réponse que vous souhaitez donner : ")
+
+        if int(user_answer) == correct_number:
+            print("Bravo! Bonne réponse")
+        else:
+            print("Raté.")
+
+
+boardgame = Board(12,12) #taille maximale pour le moment, il faut optimiser la taille dans la méthode de la classe Grid
+title = boardgame.show_title()
+print(title)
+boardgame.create_boardgame()
+score_result = boardgame.show_score()
+print(score_result)
+boardgame.show_available_cells()
+boardgame.ask_question()
 
         for i in random.sample([4,5,6,7], 4):
             print(dictionnaire_avec_question[i])
