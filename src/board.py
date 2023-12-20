@@ -230,7 +230,13 @@ class Board():
         return dico_available_cells[user_choice]   #récupère les coordonnées choisies par notre joueur
     
 
-    
+    def move(self):
+        
+        #position avant: self.x, self.y
+        #position aprés
+
+
+
     def show_title(self):
                 return f"""━━━━━━━━━━━━━━━━━━━━━━━━━━━━
        TRIVIA PURSUIT
