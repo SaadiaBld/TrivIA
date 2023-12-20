@@ -1,31 +1,28 @@
 import random
 from src.player import Player
+from src.board import Board
 
 class Game:
-    def __init__(self, numbers_of_players):
+    def __init__(self, numbers_of_players, boardgame):
         self.numbers_of_players = numbers_of_players
-        self.players = [Player(i) for i in range(numbers_of_players)]
-        self.themes = ["Python", "SQL", "Actualités", "Git", "CLI"]
+        self.players = [Player(i, boardgame) for i in range(numbers_of_players)]
         self.categories = ["⬛️","🟩","🟪","🟨","🟥","🟦", "🟧"]
         self.perfect_score = [1,2,3,4,5,6]
+        self.actual_player = 0
 
 
-    def init_grid(self):
-        self.grid = Grid(30,30)
-        self.init_position = self.grid.init_position()
-        return self.grid
-    
+    def next_player(self):
+        self.actual_player += 1
+        self.actual_player = self.actual_player % self.numbers_of_players
 
-
-    def first_player(self):
-        pass
 
     def game_continue(self):
         for num_player in range(self.numbers_of_players):
             if (self.players[num_player].score == self.perfect_score):
                 print("Bravo, " + self.players[num_player].token  + " gagne la parite !")
-                return False;
-        return True;
+                return False
+        return True
+
 
     def print_players(self):
         for player in self.players:
@@ -38,6 +35,7 @@ class Game:
             for score in player.score:
                 affichage += self.categories[score]
             print ("le score de " + player.token + " " + affichage)
+
 
     def roll_dice():
         # tirer au sort un nombre entre 1 et 6

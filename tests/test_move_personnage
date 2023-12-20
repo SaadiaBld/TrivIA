@@ -99,14 +99,15 @@ class Board():
     
     def check_player_position(self, grid, dice_number):
         
+        return self.y, self.x
         # sauvegarder la position actuelle du joueur
         pass
     
     
     def show_available_cells(self):
         
-        dice_number = 6
-        
+        dice_number = self.roll_dice()
+        destinations_possibles = {}
         self.row = 7
         self.col = 12
         
@@ -115,6 +116,7 @@ class Board():
         # possibilité dans la même colonne (plus haut)
         
         #if self.row-1 is not False:
+        print("Choisissez votre case de destination: ")
         if self.grid[self.col][self.row-1] != "⬛️":
             if self.row - dice_number >= 0:
                 print(f"{(self.row - dice_number, self.col)}")

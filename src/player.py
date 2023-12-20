@@ -16,9 +16,9 @@ class Player:
         self.new_y = 0
         self.board = board
     
-    def roll_dice(self):
-        dice = randint(1, 6)
-        return dice
+    #def roll_dice(self):
+    #    dice = randint(1, 6)
+    #    return dice
     
     def choose_move(self):
         """On définit ici la logique de déplacement lorsque le joueur est dans les arêtes du milieu"""
