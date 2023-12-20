@@ -39,6 +39,14 @@ class Game:
                 affichage += self.categories[score]
             print ("le score de " + player.token + " " + affichage)
 
+    def roll_dice():
+        # tirer au sort un nombre entre 1 et 6
+        dice_number = random.choice(range(1,7))
+        return dice_number
+        # dé 3D? comment animer un .obj en python?
+        # dé 3D? animations Blender
+        # images des faces d'un dé?
+
 
 
 
