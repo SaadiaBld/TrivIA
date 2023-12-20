@@ -37,6 +37,19 @@ def create_table(cur):
 
 
 @get_database
+def create_table_users(cur):
+    """Crée une table pour les utilisateurs du jeu"""
+
+    cur.execute("""
+                CREATE TABLE IF NOT EXISTS Users (
+                id integer PRIMARY KEY,
+                username varchar(255),
+                games integer,
+                wins integer)
+                """)
+
+
+@get_database
 def update_table(cur):
     """Met à jour la table questions à partir d'un fichier csv"""
 
@@ -59,6 +72,22 @@ def update_table(cur):
                     """,
                     (row.category, row.difficulty, row.question, row.correct_answer, row.incorrect_answer_1, row.incorrect_answer_2, row.incorrect_answer_3)
         )
+
+
+@get_database
+def update_table_users(players, cur):
+    """Met à jour la table questions à partir des joueurs"""
+
+    for player in players:
+        result = cur.execute("""SELECT * FROM Users WHERE username = ?""", player)
+
+        # Insère un nouveau joueur dans la table
+        if len(result) == 0:
+            cur.execute("""INSERT INTO Questions (username, games, wins) VALUES (?, ?, ?)""", player, 1, 0)
+
+        # Met à jour un joueur présent dans la table
+        else:
+            cur.execute("""UPDATE Users SET games = games + 1""")
 
 
 @get_database
@@ -94,9 +123,9 @@ def read_table(category, ids_used, cur):
     else:
         return None
 
-    
-@get_database
-def delete_table(cur):
-    """Supprime la table question"""
 
-    cur.execute("""DROP TABLE Questions""")
+@get_database
+def delete_table(table, cur):
+    """Supprime une table de la bdd"""
+
+    cur.execute("""DROP TABLE ?""", table)

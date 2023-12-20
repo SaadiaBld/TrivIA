@@ -5,7 +5,8 @@ from src.board import Board
 class Game:
     def __init__(self, numbers_of_players, boardgame):
         self.numbers_of_players = numbers_of_players
-        self.players = [Player(i, boardgame) for i in range(numbers_of_players)]
+        #self.players = [Player(i, boardgame) for i in range(numbers_of_players)]
+        self.players = []
         self.categories = ["⬛️","🟩","🟪","🟨","🟥","🟦", "🟧"]
         self.perfect_score = [1,2,3,4,5,6]
         self.actual_player = 0
@@ -45,6 +46,7 @@ class Game:
         # dé 3D? animations Blender
         # images des faces d'un dé?
 
+    
 
 
 

@@ -1,20 +1,20 @@
 from random import *
+from board import *
 
 class Player:
-    #self.position = position
-    #position_initiale = 6,6 avec la taille initiale de 11*11
 
-    def __init__(self, player_id, board):
+    def __init__(self, board):
         tokens = ["🦊","🐨","🐼","🐸","🐱"]
-        self.id = int(player_id)
+        #self.id = int(player_id)
         self.name = input(f"Player{self.id +1}, what's your name?: ")
-        self.token = tokens[self.id]
+        self.token = "🦊"
         self.score = [0,0,0,0,0,0]
         self.x = 6
         self.y = 6
         self.new_x = 0
         self.new_y = 0
         self.board = board
+        #player_id enlevé ici de init
     
     #def roll_dice(self):
     #    dice = randint(1, 6)

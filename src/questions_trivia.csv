@@ -32,3 +32,37 @@ index,category,difficulty,question,correct_answer,incorrect_answer_1,incorrect_a
 31,soft_skills,Moyenne,Comment favoriser la diversité et l'inclusion au travail ?,Promouvoir un environnement accueillant pour toutes les personnes quel que soit leur origine.,Favoriser l'exclusion des opinions divergentes.,Ignorer les différences culturelles.,Privilégier un seul type de profil
 32,soft_skills,Moyenne,Qu'est-ce que la gestion du temps ?,L'efficacité dans l'utilisation du temps disponible.,Le report constant des tâches à accomplir.,L'abandon des délais.,Le travail excessif sans pause
 33,soft_skills,Moyenne,Quelle est l'importance de la rétroaction constructive ?,Elle permet d'améliorer les performances et favorise la croissance professionnelle.,Elle crée un environnement de travail hostile.,Elle décourage les efforts individuels.,Elle est inutile dans un contexte professionnel
+34,terminal,Moyenne,Comment retourner sur le répertoire que l'on vient de quitter ?,cd -,cd back,cd retour_en_arriere,cd -b
+35,terminal,Moyenne,Quelles sont les commandes qui permettent d'editer un fichier ?,vim ou emacs,edit ou write,pls ou sos,cat ou dog
+36,terminal,Moyenne,Comment avoir la doc sur une commande shell ?,man,doc,google,chat GPT
+37,terminal,Moyenne,Comment faire une recherche sur mot dans plusieurs fichiers ?,grep -nriI leMotAchercher,find -a leMotAchercher,ctrl + f leMotAchercher,search leMotAchercher
+38,terminal,Facile,Comment se deplacer vers le repertoire parent ?,cd ..,cd parent,cd back,cd -
+39,terminal,Facile,Quelle sont les couleurs originelles d'écriture dans un terminal ?,blanc sur fond noir,vers sur fond noir (comme dans matrix),noir sur fond blanc,rouge sur fond rouge
+40,terminal,Facile,Comment tout supprimer ?,rm -rf,delete all,alt + f4,del -all
+41,terminal,Facile,Comment trouver un fichier via son nom ?,find,search,grep,file
+42,terminal,Difficile,Quelle est le but du fichier .bashrc ?,Executer des scripts dans un terminal,optimiser le temps d'éxécution d'un programme,il éxécute des programme codé en Bash,Faire du café
+43,sql,Moyenne,Quelle est le système de BDD le plus utilisé ?,MySQL,Oracle,PostgreSQL,Mongo DB
+44,sql,Facile,"Que fait ""select * from ... "" dans une requette SQL ?",elle affiche toutes les colones d'une ou plusieurs tables,Elle affiche tout,Elle affiche les * de la table,Elle selectionne une table pour lui faire des traitements ultérieurs
+45,sql,Facile,Que veut dire SQL ?,Structured Query Language,System of Quantity Linear,Sofisticate Quality Layer,Suposed Question Limited
+46,sql,Facile,Quelle clause SQL est utilisée pour regrouper les résultats d'une requête SELECT ?,Group by,Order By,Having,All
+47,soft_skills,Moyenne,Quelle soft skill favorise l'adaptabilité aux changements dans le domaine technologique ?,Résolution de problèmes,Gestion du stress,Esprit d'équipe,Prise de risque
+48,soft_skills,Moyenne,Quelle soft skill est essentielle pour établir des relations professionnelles solides dans le secteur technologique ?,Networking,Gestion du temps,Résolution de conflits,Communication
+49,soft_skills,Facile,Quelle compétence est importante pour gérer efficacement les priorités dans les projets technologiques ?,Gestion du temps,Collaboration,Leadership,Créativité
+50,soft_skills,Difficile,Quelle compétence favorise la création d'un environnement inclusif dans les équipes technologiques ?,Ecoute active,Leadership,Analyse critique,Prise de décision
+51,soft_skills,Difficile,Quelle compétence est cruciale pour encourager l'innovation au sein des équipes technologiques ?,Pensée créative,Autonomie,Collaboration,Analyse de données
+52,soft_skills,Difficile,Quelle compétence est importante pour gérer le stress lors de situations critiques en technologie ?,Résilience,Flexibilité,Gestion du temps,Esprit d'équipe
+53,python,Moyenne,Quel est le résultat de 2 ** 3 en Python ?,8,6,5,12
+54,python,Moyenne,Quelle méthode est utilisée pour supprimer le dernier élément d'une liste en Python ?,pop(),remove(),delete(),erase()
+55,python,Moyenne,Quel opérateur est utilisé pour la concaténation de chaînes de caractères en Python ?,+,&,*,||
+56,python,Facile,Comment déclare-t-on une variable en Python sans assigner de valeur initiale ?,en utilisant le nom de la variable,None(),Null(),Empty()
+57,python,Facile,Comment démarre un commentaire sur une seule ligne en Python ?,#,//,/*,---
+58,python,Facile,Quelle méthode permet de renverser l'ordre des éléments d'une liste en Python ?,reverse(),invert(),flip(),backward()
+59,python,Facile,Quelle fonction est utilisée pour convertir une chaîne de caractères en majuscules en Python ?,upper(),to_upper(),capitalize(),make_upper()
+60,git,Facile,Comment supprimer les modification local d'un fichier ?,git checkout,git delete,git out,rm -rf
+61,git,Facile,Quelles est le bon ordre pour push ces modifications ?,"git pull, git add, git commit, git push","git add, git commit, git push, git pull","git pull, git commit, git add, git push","git pull, git status, git add, git commit"
+62,git,Facile,Quelle commande permet d'afficher toutes les branches ?,git branch -a,git branch -all,git all branch,git print branch
+63,git,Difficile,"Quelle est l'origine du nom ""git"" ?","c'est de l'argo britanique pour dire ""connard""",Gather Integrate Track,Gestion of Information Traceable,Ce sont les initiales de son inventeur: George Irving Thompson
+64,actu_ia,Moyenne,Quelle institution a récemment publié un rapport sur l'éthique de l'IA et son impact sur la vie privée ?,Commission européenne, Nations Unies,Organisation mondiale de la santé,FMI
+65,actu_ia,Facile,Quelle entreprise a récemment annoncé des progrès significatifs dans la création d'une IA auto-apprenante ?,OpenAI,Tesla,IBM,Facebook
+66,actu_ia,Difficile,Quel chercheur en IA a récemment reçu une reconnaissance mondiale pour ses travaux sur l'éthique de l'IA ?,Yoshua Bengio,Geoffrey Hinton,Andrew Ng,Fei-Fei Li
+67,actu_ia,Difficile,Quel organisme régulateur a récemment émis des directives sur l'utilisation éthique de l'IA dans les domaines de la santé ?,FDA (Food and Drug Administration),CDC (Centers for Disease Control and Prevention),OMS (Organisation mondiale de la santé),EMA (European Medicines Agency)
