@@ -60,12 +60,12 @@ class Player:
             self.y = int(position_choix)
             return self.y, self.x"""
         
-        for i in range (5):
+        """for i in range (5):
             self.x +=1
         self.new_x =self.x
         self.new_y = self.y
         self.update_position()
-        return self.x, self.y
+        return self.x, self.y"""
         
 
     def answer_question(self):
