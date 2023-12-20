@@ -127,13 +127,12 @@ class Board():
             
             difference = abs(dice_number - self.col)
             difference = dice_number - self.col
-            self.col = 0
             
             if (self.width-self.col)-(difference-self.row) < self.width:
-                print(f"{(self.row+difference, self.col)}")
+                print(f"{(self.row+difference, 0)}")
             
             if self.row < self.height and self.width-(self.row+difference) < self.height:
-                print(f"{(self.row+difference, self.col)}")
+                print(f"{(self.row+difference, 0)}")
                 # print(f"{(self.col, self.width-(self.row+difference))}")
             
             
@@ -189,36 +188,13 @@ class Board():
        TRIVIA PURSUIT
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━""" 
 
-    
-    def show_score(self):
-    
-        categ = ["🟩","🟪","🟨","🟥","🟦"]
-        score = ["⬛️","⬛️","⬛️","⬛️","⬛️"]
-        return f"""━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   CLASSEMENT DES JOUEURS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-      Score Player #1
-        {(''.join(score[:5]))}
-      Score Player #2 
-        {(''.join(score[:5]))}
-      Score Player #3
-        {(''.join(score[:5]))}
-    """ 
-
-        
-    def modify_score():
-
-        # Si le joueur répond correctement à une question d'une catégorie,
-        # alors on score.pop()
-        # et on score.append(categ[x])
-        # on peut aussi ajuster la liste à chaque fois qu'un joueur passe devant un autre joueur
-        # afficher la liste des scores de manière croissante/décroissante
-        pass
 
 
     def ask_question(self):
 
         self.ids = [] # à mettre dans le init de la classe
+
+        self.score = ["⬛️","⬛️","⬛️","⬛️","⬛️"]
 
         self.categories = {"0": [0, "⬛️", 0],
                                 "1": ["python", "🟩"],
@@ -261,16 +237,72 @@ class Board():
         user_answer = input("Merci de taper le chiffre correspondant à la réponse que vous souhaitez donner : ")
 
         if int(user_answer) == correct_number:
+
             print("Bravo! Bonne réponse")
+            
+            if self.categories[str(self.col)][1] not in self.score:
+                self.score = self.score.pop()
+                self.score = self.score.append(self.categories[str(self.col)][1])
+
         else:
+
             print("Raté.")
 
 
-boardgame = Board(12,12) #taille maximale pour le moment, il faut optimiser la taille dans la méthode de la classe Grid
-title = boardgame.show_title()
-print(title)
-boardgame.create_boardgame()
-score_result = boardgame.show_score()
-print(score_result)
-boardgame.show_available_cells()
-boardgame.ask_question()
+#     def show_score(self): # sûrement à modifier car ne prend pas encore en compte la class Gamer
+    
+#         # categ = ["🟩","🟪","🟨","🟥","🟦"]
+#         # self.score = ["⬛️","⬛️","⬛️","⬛️","⬛️"]
+#         # self.score = []
+
+#         # list_of_scores = [".join(self.score[:]", ".join(self.score[:5]", ".join(self.score[:5]"]
+
+#         for score in list_of_scores:
+
+
+
+#         return f"""━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#    CLASSEMENT DES JOUEURS
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#       Score Player #1
+#         {(''.join(self.score[:5]))}
+#       Score Player #2 
+#         {(''.join(self.score[:5]))}
+#       Score Player #3
+#         {(''.join(self.score[:5]))}
+#     """ 
+
+    def sort_score():
+
+        def show_score(element):
+            return len(element)
+
+        list_of_scores = [["🟩", "🟪", "🟨", "🟥", "🟦"], ["🟪","🟩"], ["🟨", "🟩", "🟪"], []]
+
+        list_of_scores_sorted = sorted(list_of_scores, key=show_score, reverse=True)
+
+        for i in list_of_scores_sorted:
+            while len(i) < 5:
+                i.append("⬛️")
+
+        print(f"""━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    CLASSEMENT DES JOUEURS
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━""")
+
+        j = 0
+
+        for i in list_of_scores_sorted:
+            j += 1
+            print(f'Player #{j} {"".join(i)}')
+
+
+
+# boardgame = Board(12,12) #taille maximale pour le moment, il faut optimiser la taille dans la méthode de la classe Grid
+# title = boardgame.show_title()
+# print(title)
+# boardgame.create_boardgame()
+# score_result = boardgame.show_score()
+# print(score_result)
+# boardgame.show_available_cells()
+# boardgame.ask_question()
+# boardgame.sort_score()
