@@ -9,6 +9,12 @@ class Board():
         self.height = height
         self.col = int(width/2)
         self.row = int(height/2)
+        self.user_answer = 0
+        self.correct_answer = 0
+        self.score = []
+        self.dico_score = {}
+
+
         
     def create_boardgame(self):
 
@@ -273,46 +279,80 @@ class Board():
                 print(f"{i}. {dictionnaire_avec_question[j]}")
                 
                 if j == "correct_answer":
-                    correct_number = i
+                    self.correct_number = i
 
         # demander de choisir une réponse à l'utilisateur
-        user_answer = input("Merci de taper le chiffre correspondant à la réponse que vous souhaitez donner : ")
+        self.user_answer = input("Merci de taper le chiffre correspondant à la réponse que vous souhaitez donner : ")
 
-        if int(user_answer) == correct_number:
+        if int(self.user_answer) == self.correct_number:
 
             print("Bravo! Bonne réponse")
             
             if self.categories[str(self.col)][1] not in self.score:
                 self.score = self.score.pop()
                 self.score = self.score.append(self.categories[str(self.col)][1])
+            else:
+                pass
 
         else:
 
             print("Raté.")
 
 
-    def sort_score():
 
-        def show_score(element):
-            return len(element)
+    def update_score(self):
 
-        list_of_scores = [["🟩", "🟪", "🟨", "🟥", "🟦"], ["🟪","🟩"], ["🟨", "🟩", "🟪"], []]
+        # besoin de la variable nombre_de_joueurs pour générer leurs scores respectifs
 
-        list_of_scores_sorted = sorted(list_of_scores, key=show_score, reverse=True)
+        for i in range(1, nb_joueurs+1):
+            self.dico_score.update({f"player {i}" : self.score})
 
-        for i in list_of_scores_sorted:
-            while len(i) < 5:
-                i.append("⬛️")
+
+        for i in self.dico_score:
+            while len(self.dico_score[i]) < 6:
+                self.dico_score[i].append("⬛️")
+
+
+        if int(self.user_answer) == self.correct_number and "🟩" not in self.score:
+        #if int(user_answer) == correct_number and self.categories[str(self.col)][1] not in self.score:
+            self.score.pop()
+            self.score.insert(0, self.categories[str(self.col)][1])
+
+        else:
+            pass
 
         print(f"""━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     CLASSEMENT DES JOUEURS
-    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━""")
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━""")
 
-        j = 0
+        for key,value in self.dico_score.items():
+            print(f"{key} : {''.join(value)}")
 
-        for i in list_of_scores_sorted:
-            j += 1
-            print(f'Player #{j} {"".join(i)}')
+
+
+    # def sort_score():
+
+    #     def show_score(element):
+    #         return len(element)
+
+    #     list_of_scores = [["🟩", "🟪", "🟨", "🟥", "🟦"], ["🟪","🟩"], ["🟨", "🟩", "🟪"], []]
+
+    #     list_of_scores_sorted = sorted(list_of_scores, key=show_score, reverse=True)
+
+    #     for i in list_of_scores_sorted:
+    #         while len(i) < 5:
+    #             i.append("⬛️")
+
+    #     print(f"""━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    # CLASSEMENT DES JOUEURS
+    # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━""")
+
+    #     j = 0
+
+    #     for i in list_of_scores_sorted:
+    #         j += 1
+    #         print(f'Player #{j} {"".join(i)}')
+
 
 
 
@@ -324,4 +364,4 @@ class Board():
 # print(score_result)
 # boardgame.show_available_cells()
 # boardgame.ask_question()
-# boardgame.sort_score()
+# boardgame.update_score()
