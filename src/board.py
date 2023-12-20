@@ -13,7 +13,9 @@ class Board():
         self.correct_answer = 0
         self.score = []
         self.dico_score = {}
-
+        self.numbers_of_players
+        self.row = [str(i+1) for i in range(0, self.width+1)]
+        self.grid = [list(self.row) for j in range(0, self.height+1)]
 
         
     def create_boardgame(self):
@@ -92,12 +94,7 @@ class Board():
         for row in grid:
             print("".join(row))
                  
-            
-    def roll_dice():
-        # tirer au sort un nombre entre 1 et 6
-        dice_number = random.choice(range(1,7))
-        return dice_number
-    
+
         # dé 3D? comment animer un .obj en python?
         # dé 3D? animations Blender
         # images des faces d'un dé?
@@ -111,15 +108,16 @@ class Board():
     
     def show_available_cells(self):
         
-        #dice_number = 6
         
-        # self.row = 7
-        # self.col = 12
+        def roll_dice():
+        # tirer au sort un nombre entre 1 et 6
+            dice_number = random.choice(range(1,7))
+            return dice_number
+        
 
         dico_available_cells = {}
         set_cells = {}
 
-        # for i in range():
 
         
         # ABOVE
@@ -130,10 +128,10 @@ class Board():
             
         # déplacement normal sur les cellules au dessus (indices de lignes inférieurs)
         if self.grid[self.col][self.row-1] != "⬛️":
-            if self.row - dice_number >= 0:
+            if self.row - self.roll_dice() >= 0:
 
                 #print(f"{(self.row - dice_number, self.col)}")
-                set_cells.add((self.row - dice_number, self.col))
+                set_cells.add((self.row - self.roll_dice(), self.col))
 
 
 
@@ -141,20 +139,16 @@ class Board():
         if self.grid[self.col-1][self.row] != "⬛️":
             if self.col < self.height:
                 #print(f"{self.row, (self.col + dice_number)}")
-                set_cells.add((self.row, (self.col + dice_number)))
+                set_cells.add((self.row, (self.col + self.roll_dice())))
 
 
             else:
                 #print(f"{self.row, (self.col - dice_number)}")
-                set_cells.add((self.row, (self.col - dice_number)))
-
-
-
-
+                set_cells.add((self.row, (self.col - self.roll_dice())))
 
 
             
-            difference = abs(dice_number - self.col)
+            difference = abs(self.roll_dice() - self.col)
             #difference = dice_number - self.col
             
             if (self.width-self.col)-(difference-self.row) < self.width:
@@ -171,9 +165,9 @@ class Board():
         # self.col = 12
             
         # si jamais on arrive à la toute première ligne, on peut virer à gauche et à droite
-        if self.row - dice_number < 0: #and self.row != 6:
+        if self.row - self.roll_dice() < 0: #and self.row != 6:
             
-            difference = dice_number - self.row
+            difference = self.roll_dice() - self.row
             
             self.col_right = self.col + difference
             self.col_left = self.col - difference
@@ -194,14 +188,14 @@ class Board():
         
         if self.row < self.height-1:
             if self.grid[self.col][self.row+1] != "⬛️" and self.row < self.height:
-                if self.row + dice_number <= self.height:
-                    set_cells.add((self.row + dice_number, self.col))
+                if self.row + self.roll_dice() <= self.height:
+                    set_cells.add((self.row + self.roll_dice(), self.col))
                     # print(f"{(self.row + dice_number, self.col)}")
             
         
-            if self.row + dice_number > self.width and self.grid[self.col][self.row+1] != "⬛️":
+            if self.row + self.roll_dice() > self.width and self.grid[self.col][self.row+1] != "⬛️":
                 
-                difference = (dice_number + self.row) - self.width
+                difference = (self.roll_dice() + self.row) - self.width
                 
                 # self.row = 12
                 self.col_right = self.col + difference
@@ -228,7 +222,35 @@ class Board():
         print(f"Vous avez choisi cette destination : {user_choice}")
     
         return dico_available_cells[user_choice]   #récupère les coordonnées choisies par notre joueur
-    
+
+
+    def move(self, grid):
+        
+        coord = self.show_available_cells
+        cell_where_player_will_go = grid[self.dico_available_cells[self.user_choice][0]][self.dico_available_cells[self.user_choice][1]]
+        
+        new_row = self.dico_available_cells[self.user_choice][0]
+        new_col = self.dico_available_cells[self.user_choice][1]
+
+        if self.row == 6 and self.col == 6:
+            start = "⬜️" #ou = 14
+            self.grid[self.row][self.col] = start
+            self.row, self.col = new_row, new_col
+            self.grid[self.row][self.col] == self.token
+        else:
+            # self.grid[self.row][self.col] == cell_where_player_will_go
+            self.row, self.col = new_row, new_col
+            self.grid[self.row][self.col] == self.token
+
+
+
+
+
+
+
+        
+
+
 
     
     def show_title(self):
@@ -304,7 +326,7 @@ class Board():
 
         # besoin de la variable nombre_de_joueurs pour générer leurs scores respectifs
 
-        for i in range(1, nb_joueurs+1):
+        for i in range(1, self.numbers_of_players+1):
             self.dico_score.update({f"player {i}" : self.score})
 
 
@@ -313,8 +335,8 @@ class Board():
                 self.dico_score[i].append("⬛️")
 
 
-        if int(self.user_answer) == self.correct_number and "🟩" not in self.score:
-        #if int(user_answer) == correct_number and self.categories[str(self.col)][1] not in self.score:
+        #if int(self.user_answer) == self.correct_number and "🟩" not in self.score:
+        if int(self.user_answer) == self.correct_number and self.categories[str(self.col)][1] not in self.score:
             self.score.pop()
             self.score.insert(0, self.categories[str(self.col)][1])
 
