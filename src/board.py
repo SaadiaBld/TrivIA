@@ -1,19 +1,20 @@
 import random
 import pandas as pd
-from db import read_table
+from src.db import read_table
+from player import *
 
 class Board():
 
-    def __init__(self, width, height):
+    def __init__(self, width, height, numbers_of_players): #j'ai ajouté numberofplayers ici
         self.width = width
         self.height = height
         self.col = int(width/2)
-        self.row = int(height/2)
+        self.row_middle = int(height/2)  #renommé self.row en self.row_middle pr eviter conflits avec self.row
         self.user_answer = 0
         self.correct_answer = 0
         self.score = []
         self.dico_score = {}
-        self.numbers_of_players
+        self.numbers_of_players = numbers_of_players
         self.row = [str(i+1) for i in range(0, self.width+1)]
         self.grid = [list(self.row) for j in range(0, self.height+1)]
 
@@ -242,7 +243,7 @@ class Board():
 
     def move(self, grid):
         
-        coord = self.show_available_cells
+        coord = self.show_available_cells()
         cell_where_player_will_go = grid[self.dico_available_cells[self.user_choice][0]][self.dico_available_cells[self.user_choice][1]]
         
         new_row = self.dico_available_cells[self.user_choice][0]
@@ -268,7 +269,13 @@ class Board():
 
 
 
-    
+    def move(self):
+        
+        #position avant: self.x, self.y
+        #position aprés
+        pass
+
+
     def show_title(self):
                 return f"""━━━━━━━━━━━━━━━━━━━━━━━━━━━━
        TRIVIA PURSUIT
@@ -402,4 +409,11 @@ class Board():
 # print(score_result)
 # boardgame.show_available_cells()
 # boardgame.ask_question()
+
+        for i in random.sample([4,5,6,7], 4):
+            print(dictionnaire_avec_question[i])
+                 
+            
+
+# boardgame.sort_score()
 # boardgame.update_score()
