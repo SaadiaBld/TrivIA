@@ -154,8 +154,6 @@ class Player:
 
         # Change les positions de new x,y pour celle de la case choisie
         self.future_cell = self.show_available_cells()
-        print(self.future_cell[0]) 
-        print(self.future_cell[1])
         self.new_x, self.new_y = self.future_cell[0], self.future_cell[1]
 
         # Sauvegarde la couleur de la case choisie
