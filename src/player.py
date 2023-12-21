@@ -84,3 +84,21 @@ class Player:
     
     def show_score(self):
         return self.score
+    
+
+    
+    def move(self, grid):
+
+        if self.row == 6 and self.col == 6:
+            self.grid[self.row][self.col] = "⬜️"
+        else:
+            self.grid[self.row][self.col] = color
+
+        future_cell = self.show_available_cells()
+        new_row, new_col = future_cell[0], future_cell[1]
+
+        color = self.grid[new_row][new_col]  # cell where player will go
+        color
+
+        # remplacer la couleur par l'émoji du joueur
+        self.grid[self.row][self.col] = self.token
