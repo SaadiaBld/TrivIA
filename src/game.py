@@ -11,6 +11,7 @@ class Game:
         self.perfect_score = ["🟩","🟪","🟨","🟥","🟦", "🟧"]
         self.actual_player = 0
         self.ids = []
+        self.game_over = False
 
     def next_player(self):
         self.actual_player += 1
@@ -18,12 +19,13 @@ class Game:
 
 
     def game_continue(self):
+        if self.game_over == True:
+            return False
         for num_player in range(self.numbers_of_players):
             if (self.players[num_player].score == self.perfect_score):
                 print("Bravo, " + self.players[num_player].token  + " gagne la partie !")
                 return False
         return True
-
 
     def print_players(self):
         for player in self.players:
@@ -66,6 +68,11 @@ class Game:
         categ = self.categories[player.color_of_question]
 
         dictionnaire_avec_question = read_table(categ, self.ids)
+
+        if dictionnaire_avec_question is None:
+            self.game_over = True
+            return
+
         # print(dictionnaire_avec_question)
         self.ids.append(dictionnaire_avec_question["id"])
 
