@@ -91,8 +91,8 @@ class Game:
             for i in range(len(player.score)):
                 if self.perfect_score[i] == player.color_of_question:
                     player.score[i] = 1#self.perfect_score[i]
-                    print(self.perfect_score[i])
-                    print(player.score)
+                    #print(self.perfect_score[i])
+                    #print(player.score)
 
             # if self.categories[str(self.col)][1] not in self.score:
             #     self.score = self.score.pop()

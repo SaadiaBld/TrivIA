@@ -1,7 +1,7 @@
 import random
 import pandas as pd
 from src.db import read_table
-from src.player import *
+from src.joueur import *
 
 class Board:
 	def __init__(self, width, height):
