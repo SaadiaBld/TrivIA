@@ -12,6 +12,7 @@ from src.joueur import Player
 #     interface.afficher_board()
 
 if __name__ == "__main__":
+	print("")
 
 	# Initialisation du jeu et des objets board, game et players
 	nb_player = "0"
@@ -26,15 +27,16 @@ if __name__ == "__main__":
 	game = Game(int(nb_player), boardgame)
 
 	game.print_players()
+	print("")
 	player_turn = 0
 	boardgame.create_boardgame()
-	G = game.create_graph()
+	print("")
+	# G = game.create_graph()
 	
 
 
 
 while game.game_continue():
-
 	# Affiche la grille
 	# print(title)
 
@@ -61,7 +63,7 @@ while game.game_continue():
 	# game.next_player()
 	for row in boardgame.grid:
 		print("".join(row))
-	input ("")
+	# input ("")
 
 	print("")
 

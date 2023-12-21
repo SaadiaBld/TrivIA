@@ -27,7 +27,9 @@ class Player:
     def roll_dice(self):
         # tirer au sort un nombre entre 1 et 6
         dice_number = random.choice(range(1,7))
+        print("")
         print ("resultat du dé: ", dice_number)
+        print("")
         return dice_number
 
 
@@ -47,8 +49,8 @@ class Player:
         
         # variables pour tester si on obtient les bonnes coordonnées
         dice_number = self.dice
-        self.col = self.x
-        self.row = self.y
+        self.col = self.y
+        self.row = self.x
         
 
         # si on est sur la première ligne on peut aller à gauche et à droite
@@ -113,7 +115,7 @@ class Player:
                 #print(f"{(self.row, self.col-dice_number)}")
                 set_cells.add((self.row, self.col-dice_number))
 
-            else:
+            elif self.col - dice_number <= 0 and self.col != 0:
                 diff = abs(self.col - dice_number)
                 #print(f"{(0, abs(self.col-diff))}")
                 #print(f"{(0, self.col+diff)}")
@@ -210,9 +212,10 @@ class Player:
         for i,j in dico_available_cells.items():
             print(f"Choix {i} : {j}")
 
+        print("")
         user_choice = int(input("Merci de taper le chiffre correspondant à la case où vous souhaitez vous déplacer : "))
-        print(f"Vous avez choisi cette destination : {user_choice}")
-    
+        # print(f"Vous avez choisi cette destination : {user_choice}")
+        print("")
         return dico_available_cells[user_choice]   #récupère les coordonnées choisies par notre joueur       
     def move(self):
 
@@ -225,8 +228,7 @@ class Player:
 
         # Change les positions de new x,y pour celle de la case choisie
         self.future_cell = self.show_available_cells()
-        print(self.future_cell[0]) 
-        print(self.future_cell[1])
+
         self.new_x, self.new_y = self.future_cell[0], self.future_cell[1]
 
         # Sauvegarde la couleur de la case choisie
@@ -252,7 +254,8 @@ class Player:
                 score += self.perfect_score[i]
             else:
                 score += "⬛️"
-        print(score)
+        print(self.token + " " + score)
+        print("")
     
 
 

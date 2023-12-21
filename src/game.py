@@ -35,12 +35,12 @@ class Game:
             print(player.name + " " + player.token)
 
 
-    def print_score(self):
-        for player in self.players:
-            affichage = ""
-            for score in player.score:
-                affichage += self.categories[score]
-            print ("le score de " + player.token + " " + affichage)
+    # def print_score(self):
+    #     for player in self.players:
+    #         affichage = ""
+    #         for score in player.score:
+    #             affichage += self.categories[score]
+    #         print ("le score de " + player.token + " " + affichage)
 
 
     def roll_dice(self):
@@ -80,7 +80,7 @@ class Game:
         self.ids.append(dictionnaire_avec_question["id"])
 
         # afficher la question (sortie de manière aléatoire via SQL)
-        print(dictionnaire_avec_question["question"])
+        print("QUESTION: " + dictionnaire_avec_question["question"])
 
         # randomiser et afficher les réponses (pour éviter que ce soit toujours la réponse A la réponse correcte)
         i = 0
@@ -92,6 +92,7 @@ class Game:
                     self.correct_number = i
 
         # demander de choisir une réponse à l'utilisateur
+        print("")
         self.user_answer = input("Merci de taper le chiffre correspondant à la réponse que vous souhaitez donner : ")
 
         if int(self.user_answer) == self.correct_number:
