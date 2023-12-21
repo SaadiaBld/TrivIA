@@ -1,6 +1,6 @@
 import random
 import pandas as pd
-from db import read_table
+from src.db import read_table
 from player import *
 
 class Board():

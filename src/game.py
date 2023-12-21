@@ -1,11 +1,12 @@
 import random
+from src.player import *
 #from src.board import Board
 
 class Game:
     def __init__(self, numbers_of_players, boardgame):
-        from player import Player 
+        self.boardgame = boardgame
         self.numbers_of_players = numbers_of_players
-        self.players = [Player(boardgame) for _ in range(numbers_of_players)]   
+        self.players = [Player(self.boardgame) for _ in range(numbers_of_players)]   
         self.categories = ["⬛️","🟩","🟪","🟨","🟥","🟦", "🟧"]
         self.perfect_score = [1,2,3,4,5,6]
         self.actual_player = 0
