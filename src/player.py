@@ -2,7 +2,8 @@ from random import *
 #from board import *
 from src.game import *
 #attention, ici tests sont inclus ainsi que les modifs liées aux fonctions deplacées depuis board
-    
+import networkx as nx
+
 class Player:
     def __init__(self, board):
         tokens = ["🦊","🐨","🐼","🐸","🐱"]
@@ -30,6 +31,62 @@ class Player:
     def answer_question(self):
         #return self.board.ask_question() ici teste True
         return True
+    
+    
+    def show_available_cells_graph(self, G, dice_result, current_position):
+        paths = nx.single_source_shortest_path_length(G, current_position, cutoff=dice_result)
+        nodes_to_go = [node for node, distance in paths.items() if distance == dice_result]
+        return nodes_to_go
+
+
+    def create_graph(self):
+        # Créer un graphe vide
+        G = nx.Graph()
+
+        n_ext = 48
+        n_total = 69
+
+        # Création du cercle extérieur
+        for i in range(0, n_ext):
+            G.add_node(i)
+
+        # Création des arrêtes extérieurs
+        for i in range(0, n_ext-1):
+            G.add_edge(i, i + 1)
+
+        # La boucle est bouclée
+        G.add_edge(n_ext-1, 0)
+
+        # Création des chemins intérieurs
+        for i in range(n_ext, n_total):
+            G.add_node(i)
+
+        centre = 53
+
+        # Branche 1
+        for i in range(48, 58):
+            G.add_edge(i, i + 1)
+
+        # Branche 2
+        for i in range(59, 64):
+            G.add_edge(i, i + 1)
+
+        # Branche 2 bis
+        for i in range(64, 69):
+            G.add_edge(i, i + 1)
+
+        # Connexions spéciales à l'extérieur
+        G.add_edge(6, 59)
+        G.add_edge(18, 58)
+        G.add_edge(30, 68)
+        G.add_edge(42, 48)
+
+        # Connexions spéciales à l'intérieur
+        G.add_edge(centre, 63)
+        G.add_edge(centre, 64)
+
+        return G
+
     
     def show_available_cells(self):
 
@@ -173,7 +230,6 @@ class Player:
         return self.score
     
 
-<<<<<<< HEAD
     
     def move(self, grid):
 
@@ -190,15 +246,3 @@ class Player:
 
         # remplacer la couleur par l'émoji du joueur
         self.grid[self.row][self.col] = self.token
-=======
-
-
-# board1 = Board(12, 12, 3)
-# board1.create_boardgame()
-# #game1 = Game(2, board1)
-# #print(game1.players[0].name, game1.players[0].token)
-# ##print(game1.players[1].name, game1.players[1].token)
-# board1
-# player1 = Player(board1)
-# player1.move()
->>>>>>> 1310c33b2f8d64374d9b1b0c145451f556d3ba1e
