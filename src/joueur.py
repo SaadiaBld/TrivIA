@@ -147,29 +147,26 @@ class Player:
     def move(self):
 
         self.dice = self.roll_dice()
-        if self.y == 6 and self.x == 6:# and self.answer_question():
+
+        # Change la couleur de l'ancienne case pour celle de départ
+        if self.y == 6 and self.x == 6:
             self.board.grid[self.x][self.y] = "⬜️"
         else:
-            self.board.grid[self.x][self.y] = self.color
+            self.board.grid[self.x][self.y] = self.case_color
 
-        self.color = self.board.grid[self.new_x][self.new_y] # cell where player will go
-
-
+        # Change les positions de new x,y pour celle de la case choisie
         self.future_cell = self.show_available_cells()
         self.new_x, self.new_y = self.future_cell[0], self.future_cell[1]
 
+        # Sauvegarde la couleur de la case choisie
+        self.case_color = self.board.grid[self.new_x][self.new_y]
 
+        # Doublon 
         self.color_of_question = self.board.grid[self.new_x][self.new_y]
 
-        self.board.grid[self.x][self.y] = self.token
+        self.board.grid[self.new_x][self.new_y] = self.token
 
         self.x, self.y = self.new_x, self.new_y
-
-    #def update_position(self):
-        old_value = self.board.grid[self.x][self.y]
-        #if self.answer_question():
-        self.board.grid[self.x][self.y]=old_value
-        self.board.grid[self.new_x][self.new_y] = self.token
     
     def upgrade_score(self):
         if self.answer_question():
@@ -178,14 +175,13 @@ class Player:
     
     def show_score(self):
         #return self.score
-        score
+        score = ""
         for i in range(6):
             if self.score[i] != 0:
                 score += self.perfect_score[i]
             else:
                 score += "⬛️"
         print(score)
-        return ("OUI")
     
 
 

@@ -51,7 +51,7 @@ while game.game_continue():
 	# boardgame.ask_question()
 	game.ask_question(current_player)
 
-	print(current_player.show_score())
+	current_player.show_score()
 	# Affichage et mise à jour du score
 	# game.print_score()
 
