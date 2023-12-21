@@ -42,12 +42,12 @@ while game.game_continue():
 	# game.print_score()
 
 	# Lance un dé pour sélectionner les cases disponibles pour le déplacement
-	dice = game.roll_dice()
+	# dice = game.roll_dice()
 	# boardgame.show_available_cells()
 
 	# Affichage des possibilités de déplacement, déplacement joueur et affichage grille
 	current_player = game.players[game.actual_player]
-	current_player.move(G, dice, 53)
+	current_player.move()
 
 	# Pose une question au joueur
 	# boardgame.ask_question()
