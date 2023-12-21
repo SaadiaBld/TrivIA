@@ -1,7 +1,7 @@
 import random
 import pandas as pd
 from src.db import read_table
-from src.player import *
+from src.joueur import *
 
 class Board:
 	def __init__(self, width, height):
@@ -74,9 +74,9 @@ class Board:
         
         # DIAGONALES
         # Création des diagonales
-		for i in range(1, 12):
-			grid[i][i] = categories[str(i+1)][1]
-			grid[i][self.width - i] = categories[str(self.width - i + 1)][1]
+		# for i in range(1, 12):
+		# 	grid[i][i] = categories[str(i+1)][1]
+		# 	grid[i][self.width - i] = categories[str(self.width - i + 1)][1]
             
                 
         # Modification du centre de la grille    #START
@@ -93,7 +93,3 @@ class Board:
 		for row in grid:
 			print("".join(row))
                  
-
-        # dé 3D? comment animer un .obj en python?
-        # dé 3D? animations Blender
-        # images des faces d'un dé?

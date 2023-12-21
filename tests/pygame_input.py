@@ -18,13 +18,10 @@ from src.db import read_table
 def tmp_get_question():
 
     question = read_table("python", [])
-    print(question)
+    return question
 
 
 def draw_rectangles(width, height):
-
-    width = width
-    height = height
 
     question_width = width
     question_height = height / 2
@@ -43,11 +40,10 @@ def draw_rectangles(width, height):
     rects.append(pygame.Rect(rect_question))
     for answer in rect_answers:
         rects.append(pygame.Rect(answer))
+    return rects
 
 
 def display_question(width, height):
-    width = width
-    height = height
 
     pygame.init()
     window = pygame.display.set_mode((width, height))
@@ -57,9 +53,10 @@ def display_question(width, height):
     black = (0, 0, 0)
 
     rects = draw_rectangles(width, height)
+    question = tmp_get_question()
 
     font = pygame.font.Font(None, 24)
-    text_surface = font.render("text", True, black)
+    text_surface = font.render(question["question"], True, black)
     text_rect = text_surface.get_rect()
 
     running = True
@@ -67,9 +64,10 @@ def display_question(width, height):
     while running:
 
         window.fill(white)
-        pygame.draw.rect(window, white, rect)
-        text_rect.center = rect.center
-        window.blit(text_surface, text_rect.topleft)
+        for rect in rects:
+            pygame.draw.rect(window, white, rect)
+            text_rect.center = rect.center
+            window.blit(text_surface, text_rect.topleft)
 
         pygame.display.flip()
 

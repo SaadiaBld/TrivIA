@@ -3,6 +3,7 @@ import pandas as pd
 from src.db import read_table
 from player import *
 
+
 class Board():
 
     def __init__(self, width, height, numbers_of_players): #j'ai ajouté numberofplayers ici
@@ -18,6 +19,7 @@ class Board():
         self.row = [str(i+1) for i in range(0, self.width+1)]
         self.grid = [list(self.row) for j in range(0, self.height+1)]
 
+    
         
     def create_boardgame(self):
 
