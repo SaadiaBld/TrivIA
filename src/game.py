@@ -1,12 +1,11 @@
 import random
-from src.player import Player
-from src.board import Board
+#from src.board import Board
 
 class Game:
     def __init__(self, numbers_of_players, boardgame):
+        from player import Player 
         self.numbers_of_players = numbers_of_players
-        #self.players = [Player(i, boardgame) for i in range(numbers_of_players)]
-        self.players = []
+        self.players = [Player(boardgame) for _ in range(numbers_of_players)]   
         self.categories = ["⬛️","🟩","🟪","🟨","🟥","🟦", "🟧"]
         self.perfect_score = [1,2,3,4,5,6]
         self.actual_player = 0
@@ -20,7 +19,7 @@ class Game:
     def game_continue(self):
         for num_player in range(self.numbers_of_players):
             if (self.players[num_player].score == self.perfect_score):
-                print("Bravo, " + self.players[num_player].token  + " gagne la parite !")
+                print("Bravo, " + self.players[num_player].token  + " gagne la partie !")
                 return False
         return True
 
