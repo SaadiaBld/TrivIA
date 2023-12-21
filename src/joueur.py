@@ -2,7 +2,12 @@ import random
 #from board import *
 # from src.game import *
 #attention, ici tests sont inclus ainsi que les modifs liées aux fonctions deplacées depuis board
-    
+
+# Add jeremy
+import json
+import networkx as nx
+
+
 class Player:
     def __init__(self, id, board):
         tokens = ["🦊","🐨","🐼","🐸","🐱"]
@@ -142,7 +147,35 @@ class Player:
         return dico_available_cells[user_choice]
 
 
-    def move(self):
+    
+    
+    def show_available_cells_graph(self, G, dice_result, current_position):
+        dico_available_cells = {}
+        paths = nx.single_source_shortest_path_length(G, current_position, cutoff=dice_result)
+        nodes_to_go = [node for node, distance in paths.items() if distance == dice_result]
+
+        # Chemin du fichier JSON
+        chemin_fichier_json = 'src/mapping_coor.json'
+
+        # Charger le JSON depuis le fichier et le convertir en dictionnaire
+        with open(chemin_fichier_json, 'r') as fichier:
+            dict_mapping = json.load(fichier)
+
+        j = 0    
+        for i in nodes_to_go:
+            j += 1
+            dico_available_cells[j] = dict_mapping.get(str(i))
+
+        for i,j in dico_available_cells.items():
+            print(f"Choix {i} : {j}")
+
+        print(self.roll_dice())
+        user_choice = int(input("Merci de taper le chiffre correspondant à la case où vous souhaitez vous déplacer : "))
+        print(f"Vous avez choisi cette destination : {user_choice}")
+    
+        return dico_available_cells[user_choice]
+
+    def move(self, G, dice_result, current_position):
 
         self.dice = self.roll_dice()
 
@@ -153,7 +186,7 @@ class Player:
             self.board.grid[self.x][self.y] = self.case_color
 
         # Change les positions de new x,y pour celle de la case choisie
-        self.future_cell = self.show_available_cells()
+        self.future_cell = self.show_available_cells_graph(G, dice_result, current_position)
         print(self.future_cell[0]) 
         print(self.future_cell[1])
         self.new_x, self.new_y = self.future_cell[0], self.future_cell[1]
