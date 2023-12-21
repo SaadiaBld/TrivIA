@@ -173,7 +173,6 @@ class Player:
         return self.score
     
 
-<<<<<<< HEAD
     
     def move(self, grid):
 
@@ -190,15 +189,4 @@ class Player:
 
         # remplacer la couleur par l'émoji du joueur
         self.grid[self.row][self.col] = self.token
-=======
 
-
-# board1 = Board(12, 12, 3)
-# board1.create_boardgame()
-# #game1 = Game(2, board1)
-# #print(game1.players[0].name, game1.players[0].token)
-# ##print(game1.players[1].name, game1.players[1].token)
-# board1
-# player1 = Player(board1)
-# player1.move()
->>>>>>> 1310c33b2f8d64374d9b1b0c145451f556d3ba1e
