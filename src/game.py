@@ -2,6 +2,9 @@ import random
 from src.joueur import Player
 from src.db import read_table
 
+# Add jeremy
+import networkx as nx
+
 class Game:
     def __init__(self, numbers_of_players, boardgame):
         self.boardgame = boardgame
@@ -98,8 +101,8 @@ class Game:
             for i in range(len(player.score)):
                 if self.perfect_score[i] == player.color_of_question:
                     player.score[i] = 1#self.perfect_score[i]
-                    print(self.perfect_score[i])
-                    print(player.score)
+                    #print(self.perfect_score[i])
+                    #print(player.score)
 
             # if self.categories[str(self.col)][1] not in self.score:
             #     self.score = self.score.pop()
@@ -115,3 +118,50 @@ class Game:
 
 
 
+    def create_graph(self):
+        # Créer un graphe vide
+        G = nx.Graph()
+
+        n_ext = 48
+        n_total = 69
+
+        # Création du cercle extérieur
+        for i in range(0, n_ext):
+            G.add_node(i)
+
+        # Création des arrêtes extérieurs
+        for i in range(0, n_ext-1):
+            G.add_edge(i, i + 1)
+
+        # La boucle est bouclée
+        G.add_edge(n_ext-1, 0)
+
+        # Création des chemins intérieurs
+        for i in range(n_ext, n_total):
+            G.add_node(i)
+
+        centre = 53
+
+        # Branche 1
+        for i in range(48, 58):
+            G.add_edge(i, i + 1)
+
+        # Branche 2
+        for i in range(59, 64):
+            G.add_edge(i, i + 1)
+
+        # Branche 2 bis
+        for i in range(64, 69):
+            G.add_edge(i, i + 1)
+
+        # Connexions spéciales à l'extérieur
+        G.add_edge(6, 59)
+        G.add_edge(18, 58)
+        G.add_edge(30, 68)
+        G.add_edge(42, 48)
+
+        # Connexions spéciales à l'intérieur
+        G.add_edge(centre, 63)
+        G.add_edge(centre, 64)
+
+        return G

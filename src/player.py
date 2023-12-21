@@ -2,7 +2,9 @@ from random import *
 #from board import *
 from src.game import *
 #attention, ici tests sont inclus ainsi que les modifs liées aux fonctions deplacées depuis board
-    
+
+
+
 class Player:
     def __init__(self, board):
         tokens = ["🦊","🐨","🐼","🐸","🐱"]
@@ -30,6 +32,10 @@ class Player:
     def answer_question(self):
         #return self.board.ask_question() ici teste True
         return True
+
+
+
+        
     
     def show_available_cells(self):
 
@@ -148,7 +154,7 @@ class Player:
         else:
             self.board.grid[self.x][self.y] = color
 
-        future_cell = self.show_available_cells()
+        future_cell = self.show_available_cells_graph()
         self.new_y, self.new_x = future_cell[0], future_cell[1]
 
         color = self.board.grid[self.new_x][self.new_y] # cell where player will go
@@ -173,7 +179,6 @@ class Player:
         return self.score
     
 
-<<<<<<< HEAD
     
     def move(self, grid):
 
@@ -190,15 +195,3 @@ class Player:
 
         # remplacer la couleur par l'émoji du joueur
         self.grid[self.row][self.col] = self.token
-=======
-
-
-# board1 = Board(12, 12, 3)
-# board1.create_boardgame()
-# #game1 = Game(2, board1)
-# #print(game1.players[0].name, game1.players[0].token)
-# ##print(game1.players[1].name, game1.players[1].token)
-# board1
-# player1 = Player(board1)
-# player1.move()
->>>>>>> 1310c33b2f8d64374d9b1b0c145451f556d3ba1e
