@@ -107,125 +107,138 @@ class Board():
         pass
     
     
-    def show_available_cells(self):
+        def show_available_cells(self):
 
         dico_available_cells = {}
         set_cells = {}
         
         dice_number = 6
         
-        self.col = 6
-        self.row = 6
+        self.col = 1
+        self.row = 0
         
-        # ABOVE
-        
-        # possibilité dans la même colonne (plus haut)
-        
-        #if self.row-1 is not False:
-        
-        if self.grid[self.col][self.row-1] != "⬛️":
-            if 12 >= (self.row - dice_number) >= 0:
-                print(f"{(self.col, self.row - dice_number)}")
-                #set_cells.add((self.col, self.row - dice_number))
 
-                if self.row != self.height and self.grid[self.col][self.row+1] != "⬛️" and self.row+1 < self.height:
-                    print(f"{(self.row - dice_number, self.col)}")
-                    #set_cells.add((self.row - dice_number, self.col))
+        # si on est sur la première ligne on peut aller à gauche et à droite
+        # mais si position + dé est inférieur à 0 ou supérieur à 12
+        # alors on ajoute la diff à self.col 
 
-                    #print(f"{(self.row + dice_number, self.col)}")
+        if self.row == 0:
 
-                if self.col == 6 and self.row == 6:
-                    print(f"{(self.row - dice_number, self.col)}")
-                    #set_cells.add((self.row - dice_number, self.col))
-                    print(f"{(self.row + dice_number, self.col)}")
-                    #set_cells.add((self.row + dice_number, self.col))
-            
-        if self.grid[self.col-1][self.row] != "⬛️": # and self.col+1 > self.height:
-            if self.col < self.height:
-                print(f"{self.col + dice_number, self.row}")
-                #set_cells.add((self.col + dice_number, self.row))
+            # déplacement à gauche sur une ligne
+            if self.col - dice_number >= 0:
+                print(f"{(self.row, self.col - dice_number)}")
 
-            if self.col - dice_number < 0:
-                diff = abs(self.col-dice_number)
-                print(f"{0, self.row+diff}")
-                #set_cells.add((0, self.row+diff))
+            # si jamais "index out of range" alors on ajoute la différence restante à self.row
             else:
-                print(f"{(abs(self.col - dice_number)), self.row}")
-                #set_cells.add((abs(self.col - dice_number), self.row))
+                diff = abs(self.col - dice_number)
+                print(f"{(self.row + diff, 0)}")
+
+            # déplacement à droite sur une ligne
+            if self.col + dice_number <= 12:
+                print(f"{self.row, self.col + dice_number}")
+
+            # si jamais "index out of range" alors on ajoute la différence restante à self.row    
+            else:
+                diff = abs(12-(self.col + dice_number))
+                print(f"{self.row+diff, 12}")
+
+
+
+        if self.row == 12:
+
+            # déplacement à gauche sur une ligne
+            if self.col - dice_number >= 0:
+                print(f"{(self.row, self.col - dice_number)}")
+                
+            # si jamais "index out of range" alors on soustrait la différence restante à self.row pour 
+            else:
+                diff = abs(self.col - dice_number)
+                print(f"{(self.row - diff, 12)}")
+
+            # déplacement à droite sur une ligne
+            if self.col + dice_number <= self.width:
+                print(f"{12, self.col + dice_number}")
+
+            # si jamais "index out of range" alors l
+            else:
+                diff = abs(12 - (dice_number + self.col))
+                print(f"{self.row-diff, 12}")
+
+
+        if self.row == 6:
+
+            # déplacement à gauche
+            if self.col - dice_number >= 0:
+                print(f"{(self.row, self.col-dice_number)}")
+
+            else:
+                diff = abs(self.col - dice_number)
+                print(f"{(0, abs(self.col-diff))}")
+                print(f"{(0, self.col+diff)}")
+
+            # if self.col + dice_number <= 12:
+            #     print(f"{(self.row, self.col+dice_number)}")
 
             # else:
-            #     print(f"{(self.col - dice_number), self.row}")
-            
-        #     difference = abs(dice_number - self.col)
-        #     difference = dice_number - self.col
-        #     # self.col = 0
-            
+            #     diff = abs(12 -(self.col+dice_number))
+            #     print(f"{(self.row-diff,12)}")
+            #     print(f"{(self.row+diff, 12)}")
 
-        #     # C'EST CETTE PARTIE QUI POSE PB : DONNE DES COORDONNEES (0,5) QUI N'ONT PAS LIEU D'ETRE 
 
-        #     if self.col == 6 and self.row == 6:
-
-        #         if dice_number >= self.col or dice_number >= self.row:
-
-        #             if (self.width-self.col)-(difference-self.row) < self.width:
-        #                 print(f"{(self.col, self.row+difference)}")
-                        
-        #             if self.row < self.height and self.width-(self.row+difference) < self.height:  #and self.col == 6 and self.row == 6:
-        #                 print(f"{(self.col, self.row+difference)}")
-        #                 print(f"{(self.col, self.width-(self.row+difference))}")
-                
-        # self.col = 3
-        # self.row = 0
-            
-        # si jamais on arrive à la toute première ligne, on peut virer à gauche et à droite
-        if self.row - dice_number < 0: #and self.row != 6:
-            
-            difference = dice_number - self.row
-            
-            self.col_right = self.col + difference
-            self.col_left = self.col - difference
-            
-            if self.width > self.col_right >= 0:
-                print(f"{(self.col_right, 0)}") # possibilité à droite
-                #set_cells.add((self.col_right, 0))
-                
-            if self.col_left >= 0:
-                print(f"{(self.col_left, 0)}") # possibilité à gauche
-                #set_cells.add((self.col_left, 0))
-                
         
-        # self.col = 3
-        # self.row = 0
-        
-        # # #BELOW 
-        
-        if self.row < self.height-1:
-            if self.grid[self.col][self.row+1] != "⬛️":
-                if self.row + dice_number <= self.height:
-                    print(f"{(self.col, self.row + dice_number)}")
-                    #set_cells.add((self.col, self.row + dice_number))
-                    
-                    if self.col + dice_number < self.height:
-                        print(f"{(self.col + dice_number, self.row)}")
-                        #set_cells.add((self.col + dice_number, self.row))
-            
-        
-            if self.row + dice_number > self.width and self.grid[self.col][self.row+1] != "⬛️":
-                
-                difference = (dice_number + self.row) - self.width
-                
-                self.row = 12
-                self.col_right = self.col + difference
-                self.col_left = self.col - difference
-                
-                if self.width > self.col_right > 0:
-                    print(f"{(self.col_right, self.row)}") # possibilité à droite
-                    #set_cells.add((self.col_right, self.row))
-                    
-                if self.col_left > 0:
-                    print(f"{(self.col_left, self.row)}") # possibilité à gauche
-                    #set_cells.add((self.col_left, self.row))
+        if self.col == 0:
 
+            #déplacement en haut
+            if self.row - dice_number >= 0:
+                print(f"{(self.row-dice_number, self.col)}")
+
+            else:
+                diff = abs(self.row - dice_number)
+                print(f"{(0, self.col + diff)}")
+
+            #déplacement en bas
+            if self.row + dice_number <= 12:
+                print(f"{(self.row+dice_number, self.col)}")
+            else:
+                diff = abs(12-(self.row+dice_number))
+                print(f"{(12, self.col + diff)}")
+
+
+        if self.col == 12:
+
+            # déplacement en haut
+            if self.row - dice_number >= 0:
+                print(f"{(self.row - dice_number, 12)}")
+
+            else:
+                diff = abs(self.row - dice_number)
+                print(f"{(0, self.col - diff)}")
+
+            # déplacement en bas
+            if self.row + dice_number <= 12:
+                print(f"{(self.row+dice_number, self.col)}")
+
+            else:
+                diff = abs(12 - (self.row + dice_number))
+                print(f"{(12, self.col - diff)}")
+
+
+        if self.col == 6:
+
+            # déplacement en haut
+            if self.row - dice_number >= 0:
+                print(f"{(self.row-dice_number, self.col)}")
+            else:
+                diff = abs(self.row-dice_number)
+                print(f"{(0, self.col-diff)}")
+                print(f"{(0, self.col+diff)}")
+
+            if self.row + dice_number <= 12:
+                print(f"{(self.row+dice_number, self.col)}")
+            else:
+                diff = abs(12-(self.row+dice_number))
+                print(f"{(12, self.col - diff)}")
+                print(f"{(12, self.col + diff)}")
 
         # j = 0    
         # for i in set_cells:
