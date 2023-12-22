@@ -71,13 +71,6 @@ class Board:
 				if number in categories:
 					row[col_index] = categories[number][1]
                     
-        
-        # DIAGONALES
-        # Création des diagonales
-		# for i in range(1, 12):
-		# 	grid[i][i] = categories[str(i+1)][1]
-		# 	grid[i][self.width - i] = categories[str(self.width - i + 1)][1]
-            
                 
         # Modification du centre de la grille    #START
 		grid[6][6] = categories["14"][1]
