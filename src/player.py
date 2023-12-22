@@ -1,29 +1,37 @@
-from random import *
+import random
 #from board import *
-from src.game import *
+# from src.game import *
 #attention, ici tests sont inclus ainsi que les modifs liées aux fonctions deplacées depuis board
 
+# Add jeremy
+import json
+import networkx as nx
 
 
 class Player:
-    def __init__(self, board):
+    def __init__(self, id, board):
         tokens = ["🦊","🐨","🐼","🐸","🐱"]
         self.name = input(f"What's your name?: ")
-        self.token = random.choice(tokens)
-        self.score = [0,0,0,0,0,0]
+        self.token = tokens[id]
+        self.score = [0,0,0,0,0,0]#["⬛️","⬛️","⬛️","⬛️","⬛️","⬛️"]
+        self.perfect_score = ["🟩","🟪","🟨","🟥","🟦", "🟧"]
         self.x = board.col
         self.y = board.row_middle
-        self.new_x = None
-        self.new_y = None
+        self.new_x = 6
+        self.new_y = 6
         self.board = board
         self.players = []
+        self.dice = 0
         #player_id enlevé ici de init
 
     def roll_dice(self):
         # tirer au sort un nombre entre 1 et 6
         dice_number = random.choice(range(1,7))
+        print("")
+        print ("resultat du dé: ", dice_number)
+        print("")
         return dice_number
-        print ("resultat dé:", dice_number)
+
 
     def choose_move(self):
         pass
@@ -34,18 +42,15 @@ class Player:
         return True
 
 
-
-        
-    
     def show_available_cells(self):
 
         dico_available_cells = {}
         set_cells = set()
         
         # variables pour tester si on obtient les bonnes coordonnées
-        dice_number = 4
-        self.col = 12
-        self.row = 6
+        dice_number = self.dice
+        self.col = self.y
+        self.row = self.x
         
 
         # si on est sur la première ligne on peut aller à gauche et à droite
@@ -110,7 +115,7 @@ class Player:
                 #print(f"{(self.row, self.col-dice_number)}")
                 set_cells.add((self.row, self.col-dice_number))
 
-            else:
+            elif self.col - dice_number <= 0 and self.col != 0:
                 diff = abs(self.col - dice_number)
                 #print(f"{(0, abs(self.col-diff))}")
                 #print(f"{(0, self.col+diff)}")
@@ -207,35 +212,47 @@ class Player:
         for i,j in dico_available_cells.items():
             print(f"Choix {i} : {j}")
 
-        print(dico_available_cells)
+        print("")
+        user_choice = input("Merci de taper le chiffre correspondant à la case où vous souhaitez vous déplacer : ")
 
-        user_choice = int(input("Merci de taper le chiffre correspondant à la case où vous souhaitez vous déplacer : "))
-        print(f"Vous avez choisi cette destination : {user_choice}")
-    
-        return dico_available_cells[user_choice]   #récupère les coordonnées choisies par notre joueur       
-    
+        # Vérifie si l'entrée de l'utilisateur est un nombre et est une clé valide dans dico_available_cells
+        while user_choice not in map(str, dico_available_cells.keys()):
+            user_choice = input("Merci de taper le chiffre correspondant à la case où vous souhaitez vous déplacer : ")
+
+        # print(f"Vous avez choisi cette destination : {user_choice}")
+        print("")
+
+        return dico_available_cells[int(user_choice)]   #récupère les coordonnées choisies par notre joueur
 
     def move(self):
-        if self.y == 6 and self.x == 6 and self.answer_question():
+
+        print(f"Tour de {self.name} {self.token}")
+        print("")
+        self.dice = self.roll_dice()
+        # Change la couleur de l'ancienne case pour celle de départ
+        if self.y == 6 and self.x == 6:
             self.board.grid[self.x][self.y] = "⬜️"
         else:
-            self.board.grid[self.x][self.y] = color
+            self.board.grid[self.x][self.y] = self.case_color
 
-        future_cell = self.show_available_cells_graph()
-        self.new_y, self.new_x = future_cell[0], future_cell[1]
+        # Change les positions de new x,y pour celle de la case choisie
+        self.future_cell = self.show_available_cells()
 
-        color = self.board.grid[self.new_x][self.new_y] # cell where player will go
-        color
+        while self.board.grid[self.future_cell[0]][self.future_cell[1]] not in self.perfect_score:
+            print("Choix indisponible, réessayer")
+            self.future_cell = self.show_available_cells()
 
-        self.board.grid[self.y][self.x] = self.token
+        self.new_x, self.new_y = self.future_cell[0], self.future_cell[1]
 
-        self.y, self.x = self.new_y, self.new_x
+        # Sauvegarde la couleur de la case choisie
+        self.case_color = self.board.grid[self.new_x][self.new_y]
 
-    #def update_position(self):
-        old_value = self.board.grid[self.y][self.x]
-        #if self.answer_question():
-        self.board.grid[self.y][self.x]=old_value
-        self.board.grid[self.new_y][self.new_x] = self.token
+        # Doublon 
+        self.color_of_question = self.board.grid[self.new_x][self.new_y]
+
+        self.board.grid[self.new_x][self.new_y] = self.token
+
+        self.x, self.y = self.new_x, self.new_y
     
     def upgrade_score(self):
         if self.answer_question():
@@ -243,22 +260,24 @@ class Player:
         return self.score
     
     def show_score(self):
-        return self.score
+        #return self.score
+        score = ""
+        for i in range(6):
+            if self.score[i] != 0:
+                score += self.perfect_score[i]
+            else:
+                score += "⬛️"
+        print(self.token + " " + score)
+        print("")
     
 
-    
-    def move(self, grid):
 
-        if self.row == 6 and self.col == 6:
-            self.grid[self.row][self.col] = "⬜️"
-        else:
-            self.grid[self.row][self.col] = color
 
-        future_cell = self.show_available_cells()
-        new_row, new_col = future_cell[0], future_cell[1]
-
-        color = self.grid[new_row][new_col]  # cell where player will go
-        color
-
-        # remplacer la couleur par l'émoji du joueur
-        self.grid[self.row][self.col] = self.token
+# board1 = Board(12, 12, 3)
+# board1.create_boardgame()
+# #game1 = Game(2, board1)
+# #print(game1.players[0].name, game1.players[0].token)
+# ##print(game1.players[1].name, game1.players[1].token)
+# board1
+# player1 = Player(board1)
+# player1.move()

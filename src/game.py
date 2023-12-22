@@ -1,5 +1,5 @@
 import random
-from src.joueur import Player
+from src.player import Player
 from src.db import read_table
 
 # Add jeremy

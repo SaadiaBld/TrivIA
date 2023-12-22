@@ -1,7 +1,7 @@
-from src.grid import Board
+from src.board import Board
 from src.game import Game
 from src.ihm import Ihm
-from src.joueur import Player
+from src.player import Player
 
 #grille = Grid(10,10) #taille maximale pour le moment, il faut optimiser la taille dans la méthode de la classe Grid
 #grille.create_boardgame()
