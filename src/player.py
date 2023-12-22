@@ -27,7 +27,6 @@ class Player:
     def roll_dice(self):
         # tirer au sort un nombre entre 1 et 6
         dice_number = random.choice(range(1,7))
-        print("")
         print ("resultat du dé: ", dice_number)
         print("")
         return dice_number
@@ -97,7 +96,7 @@ class Player:
                 set_cells.add((self.row - diff, 12))
 
             # déplacement à droite sur une ligne
-            if self.col + dice_number <= self.width:
+            if self.col + dice_number <= 12:
                 #print(f"{(12, self.col + dice_number)}")
                 set_cells.add((12, self.col + dice_number))
 
@@ -210,9 +209,8 @@ class Player:
             dico_available_cells[j] = i
 
         for i,j in dico_available_cells.items():
-            print(f"Choix {i} : {j}")
+            print(f"Choix {i} : {self.board.grid[j[0]][j[1]]} {j}")
 
-        print("")
         user_choice = input("Merci de taper le chiffre correspondant à la case où vous souhaitez vous déplacer : ")
 
         # Vérifie si l'entrée de l'utilisateur est un nombre et est une clé valide dans dico_available_cells
@@ -226,8 +224,9 @@ class Player:
 
     def move(self):
 
-        print(f"Tour de {self.name} {self.token}")
-        print("")
+        print(f"Tour de {self.name}")
+        self.show_score()
+
         self.dice = self.roll_dice()
         # Change la couleur de l'ancienne case pour celle de départ
         if self.y == 6 and self.x == 6:
