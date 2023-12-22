@@ -221,9 +221,13 @@ class Player:
 
         # print(f"Vous avez choisi cette destination : {user_choice}")
         print("")
-        return dico_available_cells[int(user_choice)]   #récupère les coordonnées choisies par notre joueur       
+
+        return dico_available_cells[user_choice]   #récupère les coordonnées choisies par notre joueur
+
     def move(self):
 
+        print(f"Tour de {self.name} {self.token}")
+        print("")
         self.dice = self.roll_dice()
         # Change la couleur de l'ancienne case pour celle de départ
         if self.y == 6 and self.x == 6:
@@ -233,6 +237,10 @@ class Player:
 
         # Change les positions de new x,y pour celle de la case choisie
         self.future_cell = self.show_available_cells()
+
+        while self.board.grid[self.future_cell[0]][self.future_cell[1]] not in self.perfect_score:
+            print("Choix indisponible, réessayer")
+            self.future_cell = self.show_available_cells()
 
         self.new_x, self.new_y = self.future_cell[0], self.future_cell[1]
 
