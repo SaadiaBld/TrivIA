@@ -1,9 +1,7 @@
 import random
 #from board import *
 # from src.game import *
-#attention, ici tests sont inclus ainsi que les modifs liées aux fonctions deplacées depuis board
 
-# Add jeremy
 import json
 import networkx as nx
 
@@ -24,21 +22,13 @@ class Player:
         self.dice = 0
         #player_id enlevé ici de init
 
+
     def roll_dice(self):
         # tirer au sort un nombre entre 1 et 6
         dice_number = random.choice(range(1,7))
         print ("resultat du dé: ", dice_number)
         print("")
         return dice_number
-
-
-    def choose_move(self):
-        pass
-
-
-    def answer_question(self):
-        #return self.board.ask_question() ici teste True
-        return True
 
 
     def show_available_cells(self):
@@ -222,12 +212,14 @@ class Player:
 
         return dico_available_cells[int(user_choice)]   #récupère les coordonnées choisies par notre joueur
 
+
     def move(self):
 
         print(f"Tour de {self.name}")
         self.show_score()
 
         self.dice = self.roll_dice()
+
         # Change la couleur de l'ancienne case pour celle de départ
         if self.y == 6 and self.x == 6:
             self.board.grid[self.x][self.y] = "⬜️"
@@ -245,18 +237,12 @@ class Player:
 
         # Sauvegarde la couleur de la case choisie
         self.case_color = self.board.grid[self.new_x][self.new_y]
-
-        # Doublon 
         self.color_of_question = self.board.grid[self.new_x][self.new_y]
 
         self.board.grid[self.new_x][self.new_y] = self.token
 
         self.x, self.y = self.new_x, self.new_y
     
-    def upgrade_score(self):
-        if self.answer_question():
-            self.score += 1
-        return self.score
     
     def show_score(self):
         #return self.score
@@ -268,15 +254,3 @@ class Player:
                 score += "⬛️"
         print(self.token + " " + score)
         print("")
-    
-
-
-
-# board1 = Board(12, 12, 3)
-# board1.create_boardgame()
-# #game1 = Game(2, board1)
-# #print(game1.players[0].name, game1.players[0].token)
-# ##print(game1.players[1].name, game1.players[1].token)
-# board1
-# player1 = Player(board1)
-# player1.move()

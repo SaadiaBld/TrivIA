@@ -11,7 +11,7 @@ parentdir = os.path.dirname(currentdir)
 # qui est l'endroit ou la fonction import va chercher ce qu'elle est capable d'importer
 sys.path.insert(0, parentdir) 
 
-from src.db import read_table
+from src.db import *
 
 def test_all_db():
 
@@ -34,10 +34,27 @@ def test_all_db():
     print("listes des ids : ", ids_used)
 
 
+def test_one_category(category):
+
+    ids_used = []
+
+    question = read_table(category, ids_used)
+
+    while question:
+        ids_used.append(question["id"])
+        print(question)
+    
+    print("listes des ids : ", ids_used)
+
+
 def test_one_question(category):
     
     question = read_table(category, [])
     print(question)
 
 
-test_one_question("python")
+# delete_table()
+# create_table()
+# update_table()
+# test_one_question("python")
+# test_all_db()
