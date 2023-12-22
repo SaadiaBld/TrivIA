@@ -11,7 +11,7 @@ class Game:
         self.numbers_of_players = numbers_of_players
         self.players = [Player(i, self.boardgame) for i in range(numbers_of_players)]   
         self.categories = ["⬛️","🟩","🟪","🟨","🟥","🟦", "🟧"]
-        self.perfect_score = ["🟩","🟪","🟨","🟥","🟦", "🟧"]
+        self.perfect_score = [1, 1, 1, 1, 1, 1]#["🟩","🟪","🟨","🟥","🟦", "🟧"]
         self.actual_player = 0
         self.ids = []
         self.game_over = False
@@ -25,6 +25,7 @@ class Game:
         if self.game_over == True:
             return False
         for num_player in range(self.numbers_of_players):
+            #print(f"{self.players[num_player].token} : {self.players[num_player].score }  - {self.perfect_score}")
             if (self.players[num_player].score == self.perfect_score):
                 print("Bravo, " + self.players[num_player].token  + " gagne la partie !")
                 return False
@@ -103,7 +104,8 @@ class Game:
             print("Bravo! Bonne réponse")
 
             for i in range(len(player.score)):
-                if self.perfect_score[i] == player.color_of_question:
+                perfect_score = ["🟩","🟪","🟨","🟥","🟦", "🟧"]
+                if perfect_score[i] == player.color_of_question:
                     player.score[i] = 1#self.perfect_score[i]
                     #print(self.perfect_score[i])
                     #print(player.score)
