@@ -94,6 +94,9 @@ class Game:
         # demander de choisir une réponse à l'utilisateur
         print("")
         self.user_answer = input("Merci de taper le chiffre correspondant à la réponse que vous souhaitez donner : ")
+        available_answer = ['1', '2', '3', '4']
+        while self.user_answer not in available_answer:
+            self.user_answer = input("Merci de taper le chiffre correspondant à la réponse que vous souhaitez donner : ")
 
         if int(self.user_answer) == self.correct_number:
 

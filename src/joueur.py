@@ -222,7 +222,7 @@ class Player:
         # print(f"Vous avez choisi cette destination : {user_choice}")
         print("")
 
-        return dico_available_cells[user_choice]   #récupère les coordonnées choisies par notre joueur
+        return dico_available_cells[int(user_choice)]   #récupère les coordonnées choisies par notre joueur
 
     def move(self):
 
