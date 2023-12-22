@@ -2,9 +2,6 @@ import random
 from src.player import Player
 from src.db import read_table
 
-# Add jeremy
-import networkx as nx
-
 class Game:
     def __init__(self, numbers_of_players, boardgame):
         self.boardgame = boardgame
@@ -35,24 +32,6 @@ class Game:
         for player in self.players:
             print(player.name + " " + player.token)
 
-
-    # def print_score(self):
-    #     for player in self.players:
-    #         affichage = ""
-    #         for score in player.score:
-    #             affichage += self.categories[score]
-    #         print ("le score de " + player.token + " " + affichage)
-
-
-    def roll_dice(self):
-        # tirer au sort un nombre entre 1 et 6
-        dice_number = random.choice(range(1,7))
-        return dice_number
-        # dé 3D? comment animer un .obj en python?
-        # dé 3D? animations Blender
-        # images des faces d'un dé?
-
-    
     def ask_question(self, player):
 
         self.categories = {
@@ -63,17 +42,13 @@ class Game:
         "🟦" : "actu_ia",
         "🟧" : "soft_skills"}
 
-        # categories["1"][0]
-
         # retourne la catégorie de la case sur laquelle le joueur se trouve
-
-
-
         categ = self.categories[player.color_of_question]
 
         dictionnaire_avec_question = read_table(categ, self.ids)
 
         if dictionnaire_avec_question is None:
+            print("Game Over. Personne ne gagne.")
             self.game_over = True
             return
 
@@ -106,68 +81,7 @@ class Game:
             for i in range(len(player.score)):
                 perfect_score = ["🟩","🟪","🟨","🟥","🟦", "🟧"]
                 if perfect_score[i] == player.color_of_question:
-                    player.score[i] = 1#self.perfect_score[i]
-                    #print(self.perfect_score[i])
-                    #print(player.score)
-
-            # if self.categories[str(self.col)][1] not in self.score:
-            #     self.score = self.score.pop()
-            #     self.score = self.score.append(self.categories[str(self.col)][1])
-            # else:
-            #     pass
-
+                    player.score[i] = 1
         else:
-
             print("Raté.")
             print("La bonne réponse etait : " + dictionnaire_avec_question["correct_answer"])
-
-
-
-
-    def create_graph(self):
-        # Créer un graphe vide
-        G = nx.Graph()
-
-        n_ext = 48
-        n_total = 69
-
-        # Création du cercle extérieur
-        for i in range(0, n_ext):
-            G.add_node(i)
-
-        # Création des arrêtes extérieurs
-        for i in range(0, n_ext-1):
-            G.add_edge(i, i + 1)
-
-        # La boucle est bouclée
-        G.add_edge(n_ext-1, 0)
-
-        # Création des chemins intérieurs
-        for i in range(n_ext, n_total):
-            G.add_node(i)
-
-        centre = 53
-
-        # Branche 1
-        for i in range(48, 58):
-            G.add_edge(i, i + 1)
-
-        # Branche 2
-        for i in range(59, 64):
-            G.add_edge(i, i + 1)
-
-        # Branche 2 bis
-        for i in range(64, 69):
-            G.add_edge(i, i + 1)
-
-        # Connexions spéciales à l'extérieur
-        G.add_edge(6, 59)
-        G.add_edge(18, 58)
-        G.add_edge(30, 68)
-        G.add_edge(42, 48)
-
-        # Connexions spéciales à l'intérieur
-        G.add_edge(centre, 63)
-        G.add_edge(centre, 64)
-
-        return G
