@@ -213,10 +213,15 @@ class Player:
             print(f"Choix {i} : {j}")
 
         print("")
-        user_choice = int(input("Merci de taper le chiffre correspondant à la case où vous souhaitez vous déplacer : "))
+        user_choice = input("Merci de taper le chiffre correspondant à la case où vous souhaitez vous déplacer : ")
+
+        # Vérifie si l'entrée de l'utilisateur est un nombre et est une clé valide dans dico_available_cells
+        while user_choice not in map(str, dico_available_cells.keys()):
+            user_choice = input("Merci de taper le chiffre correspondant à la case où vous souhaitez vous déplacer : ")
+
         # print(f"Vous avez choisi cette destination : {user_choice}")
         print("")
-        return dico_available_cells[user_choice]   #récupère les coordonnées choisies par notre joueur       
+        return dico_available_cells[int(user_choice)]   #récupère les coordonnées choisies par notre joueur       
     def move(self):
 
         self.dice = self.roll_dice()
